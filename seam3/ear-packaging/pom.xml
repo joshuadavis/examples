@@ -8,6 +8,7 @@
     <artifactId>ear-packaging</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <description>An example Seam 3 app, packaged as an EAR with Maven 3</description>
     <modules>
         <module>eg-parent</module>
         <module>eg-ejbs</module>
