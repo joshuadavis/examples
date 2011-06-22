@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="0" class="guice.comparison.Client" singleton="false">
+        <property name="service">
+            <ref bean="mainService"/>
+        </property>
+        <property name="name">
+            <value>0</value>
+        </property>
+    </bean>
+</beans>
