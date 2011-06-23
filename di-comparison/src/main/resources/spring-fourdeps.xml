@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="serviceOne" class="eg.dicomparison.domain.ServiceOneImpl" singleton="false">
+    </bean>
+    <bean name="serviceTwo" class="eg.dicomparison.domain.ServiceTwoImpl" singleton="false">
+    </bean>
+    <bean name="serviceThree" class="eg.dicomparison.domain.ServiceThreeImpl" singleton="false">
+    </bean>
+    <bean name="serviceFour" class="eg.dicomparison.domain.ServiceFourImpl" singleton="false">
+    </bean>
+    <bean name="testBean" class="eg.dicomparison.domain.FourServiceImpl" singleton="false">
+        <constructor-arg ref="serviceOne"/>
+        <constructor-arg ref="serviceTwo"/>
+        <constructor-arg ref="serviceThree"/>
+        <constructor-arg ref="serviceFour"/>
+    </bean>
+</beans>
