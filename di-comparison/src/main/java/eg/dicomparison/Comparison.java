@@ -21,7 +21,7 @@ public class Comparison {
             "eg.dicomparison.containers.pico.PicoNoDeps",
             "eg.dicomparison.containers.guice.GuiceNoDeps",
             "eg.dicomparison.containers.spring.SpringNoDeps",
-//            "eg.dicomparison.containers.weld.WeldNoDeps",
+            "eg.dicomparison.containers.weld.WeldNoDeps",
             "eg.dicomparison.containers.pico.PicoFourDeps",
             "eg.dicomparison.containers.guice.GuiceFourDeps",
             "eg.dicomparison.containers.spring.SpringFourDeps",
