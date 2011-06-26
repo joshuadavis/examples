@@ -4,6 +4,9 @@ import eg.dicomparison.domain.Counters;
 import eg.dicomparison.domain.TestBean;
 import org.apache.commons.lang.time.StopWatch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Base class for container benchmark.
  * <br/>
@@ -13,14 +16,17 @@ import org.apache.commons.lang.time.StopWatch;
  * Time: 10:02 PM
  */
 public abstract class AbstractContainerBenchmark {
+    private static final Logger log = LoggerFactory.getLogger(AbstractContainerBenchmark.class);
+
     private int iterations;
     private StopWatch diTime = new StopWatch();
 
     public Result run() {
-        Counters.getInstance().clear();
+        Counters counters = Counters.getInstance();
+        counters.clear();
         setUpContainer();   // Create the container / injector or whatever.
         diTime.start();
-        for (int i = 0; i < iterations ; i++) {
+        for (int i = 0; i < iterations; i++) {
             // Create the object.
             TestBean bean = createTestBean();
             // Call the test method.
@@ -28,7 +34,15 @@ public abstract class AbstractContainerBenchmark {
         }
         diTime.stop();
         destroyContainer();
-        return new Result(Counters.getInstance().getClientObjectsCreated(),Counters.getInstance().getServiceObjectsCreated(),diTime.getTime());
+        long elapsedTime = diTime.getTime();
+        log.info(this.getClass().getName() + "\n\t" +
+                "clientsCreated=" + counters.getClientObjectsCreated() +
+                " clientFinalized=" + counters.getClientObjectsFinalized() +
+                "\n\tservicesCreated=" + counters.getServiceObjectsCreated() +
+                "\n\telapsed=" + elapsedTime + "ms"
+        );
+
+        return new Result(counters.getClientObjectsCreated(), counters.getServiceObjectsCreated(), elapsedTime);
     }
 
     protected abstract void setUpContainer();

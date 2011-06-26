@@ -29,7 +29,9 @@ public class WeldLookupTest {
         log.info("instance=" + instance);
         TestBean b1 = instance.get();
         log.info("b1=" + b1.toString());
+        instance = weldContainer.instance().select(TestBean.class,DefaultLiteral.INSTANCE);
         TestBean b2 = instance.get();
         log.info("b2=" + b2.toString());
+        // The creational context in the 'instance' object has both TestBean instances in it! [jsd]
     }
 }

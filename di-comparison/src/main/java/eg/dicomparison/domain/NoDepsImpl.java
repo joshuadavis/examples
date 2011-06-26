@@ -15,4 +15,9 @@ public class NoDepsImpl implements TestBean {
 
     public void action() {
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        Counters.getInstance().incrementClientFinalized();
+    }
 }
