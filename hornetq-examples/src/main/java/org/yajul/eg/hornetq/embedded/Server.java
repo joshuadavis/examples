@@ -3,6 +3,7 @@ package org.yajul.eg.hornetq.embedded;
 import org.hornetq.api.core.TransportConfiguration;
 import org.hornetq.core.config.Configuration;
 import org.hornetq.core.config.impl.ConfigurationImpl;
+import org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory;
 import org.hornetq.core.remoting.impl.netty.NettyAcceptorFactory;
 import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
@@ -18,7 +19,21 @@ import java.util.HashSet;
  */
 public class Server
 {
-    public void start()
+    public static void main(String[] args)
+    {
+        try
+        {
+            startServer();
+            LocalClient localClient = new LocalClient();
+            localClient.go();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private static void startServer()
     {
         try
         {
@@ -29,22 +44,22 @@ public class Server
             configuration.setPersistenceEnabled(false);
             configuration.setSecurityEnabled(false);
 
-            TransportConfiguration transpConf = new TransportConfiguration(NettyAcceptorFactory.class.getName());
-
+            TransportConfiguration remoteTransport = new TransportConfiguration(NettyAcceptorFactory.class.getName());
+            TransportConfiguration localTransport = new TransportConfiguration(InVMAcceptorFactory.class.getName());
             HashSet<TransportConfiguration> setTransp = new HashSet<TransportConfiguration>();
-            setTransp.add(transpConf);
-
+            setTransp.add(remoteTransport);
+            setTransp.add(localTransport);
             configuration.setAcceptorConfigurations(setTransp);
 
             // Step 2. Create and start the server
             HornetQServer server = HornetQServers.newHornetQServer(configuration);
             server.start();
+            System.out.println("HornetQ Server started.");
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-
     }
 
 }
