@@ -57,6 +57,15 @@
         <option value="$PROJECT_DIR$/seam3/ear-packaging/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/seam3/ear-packaging/eg-ear/pom.xml" />
+        <option value="$PROJECT_DIR$/seam3/ear-packaging/eg-ejbs/pom.xml" />
+        <option value="$PROJECT_DIR$/seam3/ear-packaging/eg-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/seam3/ear-packaging/eg-web/pom.xml" />
+        <option value="$PROJECT_DIR$/seam3/ear-packaging/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -186,22 +195,6 @@
     <option name="FORCE_UPDATE" value="false" />
     <option name="IGNORE_EXTERNALS" value="false" />
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.20000002" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
 
