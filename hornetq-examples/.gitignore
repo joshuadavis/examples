@@ -1,2 +1,14 @@
-.idea/libraries
-.idea/workspace.xml
+# IDEA files (NOTE: We do want the main .iml file in version control!)
+/*.iws
+/.idea/workspace.xml
+/.idea/compiler.xml
+/.idea/modules.xml
+/.idea/encodings.xml
+/.idea/libraries/*
+/.idea/artifacts/*
+/**/*.iml
+atlassian-ide-plugin.xml
+.ant-targets-*.xml
+# Build / deploy directories
+/target/
+/*/target/
