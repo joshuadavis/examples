@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <version.hornetq>2.3.0.BETA3</version.hornetq>
+        <version.hornetq>2.3.0.Final</version.hornetq>
     </properties>
 
     <dependencies>
