@@ -19,6 +19,19 @@ public class LocalClient
     {
         // Step 3. As we are not using a JNDI environment we instantiate the objects directly
         ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA(new TransportConfiguration(InVMConnectorFactory.class.getName()));
+        try
+        {
+            example(serverLocator);
+        }
+        finally
+        {
+            if (serverLocator != null)
+                serverLocator.close();
+        }
+    }
+
+    private void example(ServerLocator serverLocator) throws Exception
+    {
         ClientSessionFactory sf = serverLocator.createSessionFactory();
 
         // Step 4. Create a core queue
@@ -62,11 +75,7 @@ public class LocalClient
         finally
         {
             // Step 9. Be sure to close our resources!
-            if (sf != null)
-            {
-                sf.close();
-            }
+            sf.close();
         }
-
     }
 }

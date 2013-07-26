@@ -26,6 +26,9 @@ public class Server
             startServer();
             LocalClient localClient = new LocalClient();
             localClient.go();
+
+            LocalJMSClient localJMSClient = new LocalJMSClient();
+            localJMSClient.go();
         }
         catch (Exception e)
         {
