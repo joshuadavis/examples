@@ -29,7 +29,9 @@ public class RemoteJMSClient
         try
         {
             InitialContext ic = new InitialContext(props);
+            // Step 2. Get the JMS Connection Factory
             ConnectionFactory cf = (ConnectionFactory) ic.lookup("/ConnectionFactory");
+            // Step 3. Look up the destination (defined in hornetq-jms.xml)
             Queue queue = (Queue) ic.lookup("/queue/exampleQueue");
             runExample(cf,queue);
         }
@@ -49,6 +51,7 @@ public class RemoteJMSClient
         Session session = null;
         try
         {
+            // Step 4. Create the connection.
             connection = cf.createConnection();
 
             // Step 5. Create the session, and producer
