@@ -1,10 +1,5 @@
 package org.yajul.eg.hornetq.embedded;
 
-import org.hornetq.api.core.SimpleString;
-import org.hornetq.api.core.TransportConfiguration;
-import org.hornetq.api.core.client.*;
-import org.hornetq.core.remoting.impl.invm.InVMConnectorFactory;
-import org.hornetq.jms.client.HornetQJMSConnectionFactory;
 import org.hornetq.jms.client.HornetQQueue;
 
 import javax.jms.*;
@@ -24,30 +19,8 @@ public class LocalJMSClient
 
     public void go() throws Exception
     {
-        // Step 3. As we are not using a JNDI environment we instantiate the objects directly
-        ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA(new TransportConfiguration(InVMConnectorFactory.class.getName()));
-        ClientSessionFactory sf = serverLocator.createSessionFactory();
-
-        // Step 4. Create a core queue
-        ClientSession coreSession = sf.createSession(false, false, false);
-
-        final String queueName = "queue.exampleJmsQueue";
-        final HornetQQueue queue = new HornetQQueue(queueName);
-
-        log.info("Querying queue...");
-        ClientSession.QueueQuery q = coreSession.queueQuery(new SimpleString(queueName));
-        log.info("q.exists=" + q.isExists());
-        if (!q.isExists())
-        {
-            coreSession.createQueue(queue.getAddress(), queue.getAddress(), true);
-        }
-
-        ClientSession.BindingQuery b = coreSession.bindingQuery(new SimpleString(queueName));
-        log.info("Queue names=" + b.getQueueNames());
-
-        coreSession.close();
-
-        ConnectionFactory cf = new HornetQJMSConnectionFactory(serverLocator);
+        final Queue queue = new HornetQDestinationProviderImpl().getQueue("queue.exampleJmsQueue");
+        ConnectionFactory cf = new LocalInVMConnectionFactoryProvider().getConnectionFactory();
         Connection connection = null;
         Session session = null;
 

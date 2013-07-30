@@ -1,5 +1,7 @@
 package org.yajul.eg.hornetq.embedded;
 
+import org.hornetq.jms.client.HornetQQueue;
+
 import javax.jms.*;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -20,24 +22,12 @@ public class RemoteJMSClient
 
     public static void main(final String[] args)
     {
-        // Step 1. Connect to the HornetQ server JNDI.
-        String url = "jnp://localhost:1099";
-        Properties props = new Properties();
-        props.put("java.naming.factory.initial", "org.jnp.interfaces.NamingContextFactory");
-        props.put("java.naming.provider.url", url);
-        props.put("java.naming.factory.url.pkgs", "org.jboss.naming:org.jnp.interfaces");
         try
         {
-            InitialContext ic = new InitialContext(props);
             // Step 2. Get the JMS Connection Factory
-            ConnectionFactory cf = (ConnectionFactory) ic.lookup("/ConnectionFactory");
-            // Step 3. Look up the destination (defined in hornetq-jms.xml)
-            Queue queue = (Queue) ic.lookup("/queue/exampleQueue");
+            ConnectionFactory cf = new RemoteConnectionFactoryProvider().getConnectionFactory();
+            final HornetQQueue queue = new HornetQQueue("queue.exampleJmsQueue");
             runExample(cf,queue);
-        }
-        catch (NamingException e)
-        {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         catch (JMSException e)
         {

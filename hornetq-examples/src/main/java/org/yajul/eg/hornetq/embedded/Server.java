@@ -34,7 +34,6 @@ public class Server
         {
             // Start the JMS Server using the HornetQ core server and the JMS configuration
             // By default, this uses hornetq-configuration.xml, hornetq-jms.xml, and hornetq-users.xml
-
             EmbeddedJMS jmsServer = new EmbeddedJMS();
             jmsServer.start();
             System.out.println("Started Embedded JMS Server");

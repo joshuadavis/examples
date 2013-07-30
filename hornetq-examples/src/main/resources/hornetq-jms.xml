@@ -13,8 +13,8 @@
     </connection-factory>
 
     <!--the queue used by the example-->
-    <queue name="exampleQueue">
-        <entry name="/queue/exampleQueue"/>
+    <queue name="queue.exampleJmsQueue">
+        <entry name="/queue/exampleJmsQueue"/>
     </queue>
 
 </configuration>
