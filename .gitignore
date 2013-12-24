@@ -11,3 +11,4 @@ atlassian-ide-plugin.xml
 # Build / deploy directories
 /target/
 /*/target/
+/out
