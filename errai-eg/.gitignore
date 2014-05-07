@@ -1,0 +1,22 @@
+# IDEA files
+/*.iws
+/.idea/workspace.xml
+/.idea/compiler.xml
+/.idea/modules.xml
+/.idea/encodings.xml
+/.idea/libraries/*
+/.idea/artifacts/*
+**/*.iml
+atlassian-ide-plugin.xml
+.ant-targets-*.xml
+*.patch
+# Vim files
+*~
+**/*~
+*.swp
+**/*.swp
+# Build / deploy directories
+/target/
+/*/target/
+/build/*
+*.log
