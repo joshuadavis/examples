@@ -1,14 +1,6 @@
 package org.yajul.eg.hornetq.embedded;
 
-import org.hornetq.api.core.TransportConfiguration;
-import org.hornetq.core.config.Configuration;
-import org.hornetq.core.config.impl.ConfigurationImpl;
-import org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory;
-import org.hornetq.core.remoting.impl.netty.NettyAcceptorFactory;
-import org.hornetq.core.server.HornetQServer;
-import org.hornetq.core.server.HornetQServers;
-
-import java.util.HashSet;
+import org.hornetq.jms.server.embedded.EmbeddedJMS;
 
 /**
  * HornetQ server lifecycle.
@@ -40,24 +32,11 @@ public class Server
     {
         try
         {
-            // Step 1. Create the Configuration, and set the properties accordingly
-            Configuration configuration = new ConfigurationImpl();
-            //we only need this for the server lock file
-            configuration.setJournalDirectory("target/data/journal");
-            configuration.setPersistenceEnabled(false);
-            configuration.setSecurityEnabled(false);
-
-            TransportConfiguration remoteTransport = new TransportConfiguration(NettyAcceptorFactory.class.getName());
-            TransportConfiguration localTransport = new TransportConfiguration(InVMAcceptorFactory.class.getName());
-            HashSet<TransportConfiguration> setTransp = new HashSet<TransportConfiguration>();
-            setTransp.add(remoteTransport);
-            setTransp.add(localTransport);
-            configuration.setAcceptorConfigurations(setTransp);
-
-            // Step 2. Create and start the server
-            HornetQServer server = HornetQServers.newHornetQServer(configuration);
-            server.start();
-            System.out.println("HornetQ Server started.");
+            // Start the JMS Server using the HornetQ core server and the JMS configuration
+            // By default, this uses hornetq-configuration.xml, hornetq-jms.xml, and hornetq-users.xml
+            EmbeddedJMS jmsServer = new EmbeddedJMS();
+            jmsServer.start();
+            System.out.println("Started Embedded JMS Server");
         }
         catch (Exception e)
         {
